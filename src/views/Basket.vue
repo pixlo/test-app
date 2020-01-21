@@ -35,8 +35,9 @@ export default {
     favorites: []
   }),
   async mounted () {
-    this.catalog = await this.$store.dispatch('fetchCatalog')
-    this.favorites = await this.$store.dispatch('fetchData')
+    const [catalog, favorites] = await Promise.all([this.$store.dispatch('fetchCatalog'), this.$store.dispatch('fetchData')])
+    this.catalog = catalog
+    this.favorites = favorites
     this.loading = false
   },
   methods: {
